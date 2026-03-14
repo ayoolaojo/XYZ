@@ -63,30 +63,58 @@ const loading = document.getElementById('loading')
 
 
 
-btn.addEventListener('click',async()=>{
+// btn.addEventListener('click',async()=>{
+//     ul.innerHTML = ''
+//     showError.textContent = ''
+//     loading.textContent = 'loading...'
+//     btn.disabled = true
+    
+
+//     try {
+//         const response = await fetch('https://jsonplaceholder.typicode.com/user')
+
+//         const data = await response.json()
+//         data.forEach(user=>{
+//             const li = document.createElement('li')
+
+//             li.textContent = user.email
+//             ul.appendChild(li)
+//             loading.textContent = ''
+//         })
+        
+//     } catch (error) {
+//         loading.textContent = ''
+//         showError.textContent = 'Unable to Load'
+//     }
+    
+
+// })
+
+async function getData(url){
+  const response = await fetch(url)
+  const data = await response.json()
+  return data
+
+}
+
+btn.addEventListener('click',()=>{
     ul.innerHTML = ''
     showError.textContent = ''
     loading.textContent = 'loading...'
-    
 
     try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users')
+    const users =  getData('https://jsonplaceholder.typicode.com/users')
 
-        const data = await response.json()
-        data.forEach(user=>{
-            const li = document.createElement('li')
-
-            li.textContent = user.email
-            ul.appendChild(li)
-            loading.textContent = ''
-        })
-        
-    } catch (error) {
+    users.forEach(user => {
+        const li = document.createElement('li')
+        li.textContent = `${user.name} - ${user.email}`
+        ul.appendChild(li)
         loading.textContent = ''
-        showError.textContent = 'Unable to Load'
-    }
-    
+    })
 
+    } catch (error) {
+        showError.textContent = 'Unable to Load..'
+    }
 })
     
  
