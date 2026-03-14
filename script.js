@@ -97,22 +97,24 @@ async function getData(url){
 
 }
 
-btn.addEventListener('click',()=>{
+btn.addEventListener('click',async()=>{
     ul.innerHTML = ''
     showError.textContent = ''
     loading.textContent = 'loading...'
 
     try {
-    const users =  getData('https://jsonplaceholder.typicode.com/users')
+    const users = await getData('https://jsonplaceholder.typicode.com/users')
 
     users.forEach(user => {
         const li = document.createElement('li')
         li.textContent = `${user.name} - ${user.email}`
         ul.appendChild(li)
         loading.textContent = ''
+       
     })
 
     } catch (error) {
+         
         showError.textContent = 'Unable to Load..'
     }
 })
