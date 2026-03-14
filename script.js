@@ -33,31 +33,59 @@ const loading = document.getElementById('loading')
 //     })
 // })
 
-btn.addEventListener('click', async()=>{
+// btn.addEventListener('click', async()=>{
+//     ul.innerHTML = ''
+//     showError.textContent = ''
+//     loading.textContent = 'Loading..'
+
+//     try {
+//         const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+//         const data = await response.json()
+
+//         loading.textContent = ''
+
+//         data.forEach(user =>{
+//             const li = document.createElement('li')
+
+//             li.textContent = user.name
+
+//             ul.appendChild(li)
+//         })
+
+
+//     } catch (error) {
+//         loading.textContent = ''
+//         showError.innerText = 'Unable to load'
+//     }
+
+// })
+
+
+
+btn.addEventListener('click',async()=>{
     ul.innerHTML = ''
     showError.textContent = ''
-    loading.textContent = 'Loading..'
+    loading.textContent = 'loading...'
+    
 
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/users')
 
         const data = await response.json()
-
-        loading.textContent = ''
-
-        data.forEach(user =>{
+        data.forEach(user=>{
             const li = document.createElement('li')
 
-            li.textContent = user.name
-
+            li.textContent = user.email
             ul.appendChild(li)
+            loading.textContent = ''
         })
-
-
+        
     } catch (error) {
         loading.textContent = ''
-        showError.innerText = 'Unable to load'
+        showError.textContent = 'Unable to Load'
     }
+    
 
 })
     
